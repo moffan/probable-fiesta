@@ -22,6 +22,7 @@
       "@game": ["game/index"],
       "@systems": ["engine/systems"],
       "@components": ["engine/components"],
+      "@utils/*": ["engine/utils/*"],
     },
 
     /* Linting */
@@ -30,5 +31,5 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["engine"]
+  "include": ["engine", "game"]
 }

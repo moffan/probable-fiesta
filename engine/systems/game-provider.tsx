@@ -1,9 +1,10 @@
 import type React from "react";
 import LocationsProvider from "./locations/location-provider";
+import type { SceneComponent } from "@systems";
 
 export type GameProviderProps = {
   children: React.ReactNode;
-  game: () => React.ReactNode;
+  game: SceneComponent;
 };
 
 export default function GameProvider(props: GameProviderProps) {

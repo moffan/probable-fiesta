@@ -1,16 +1,13 @@
-import React, { createContext, useContext } from "react";
+import type { SceneComponent } from "@systems";
+import { createContext, useContext } from "react";
 
-export type NavigationOption = {
-  name: string;
-  location: () => React.ReactNode;
-};
 
-export type NavigationOptions = NavigationOption[];
+export type NavigationOptions = SceneComponent[];
 
 export type LocationSystemContext = {
-  currentLocation: () => React.ReactNode;
+  currentLocation: SceneComponent;
   navigationOptions: NavigationOptions;
-  changeCurrentLocation: (location: () => React.ReactNode) => void;
+  changeCurrentLocation: (location: SceneComponent) => void;
   setNavigationOptions: (options: NavigationOptions) => void;
 };
 

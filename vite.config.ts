@@ -9,6 +9,7 @@ export default defineConfig({
       "@game": resolve(__dirname, "game/index"),
       "@systems": resolve(__dirname, "engine/systems"),
       "@components": resolve(__dirname, "engine/components"),
+      "@utils": resolve(__dirname, "engine/utils"),
     },
   },
 });

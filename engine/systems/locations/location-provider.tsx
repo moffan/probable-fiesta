@@ -4,24 +4,25 @@ import {
   type LocationSystemContext,
   type NavigationOptions,
 } from "./location-context";
+import type { SceneComponent } from "@systems";
 
 type LocationsProviderProps = {
   children: React.ReactNode;
-  initialLocation: () => React.ReactNode;
+  initialLocation: SceneComponent;
 };
-
-type GameLocation = () => React.ReactNode;
 
 export default function LocationsProvider(props: LocationsProviderProps) {
   const { children, initialLocation } = props;
-  const [currentLocation, setCurrentLocation] = useState<GameLocation>(
+  const [currentLocation, setCurrentLocation] = useState<SceneComponent>(
     () => initialLocation,
   );
 
-  const [navigationOptions, setNavigationOptions] = useState<NavigationOptions>([]);
+  const [navigationOptions, setNavigationOptions] = useState<NavigationOptions>(
+    [],
+  );
 
   const changeCurrentLocation = useCallback(
-    (location: () => React.ReactNode) => {
+    (location: SceneComponent) => {
       setNavigationOptions([]);
       setCurrentLocation(() => location);
     },

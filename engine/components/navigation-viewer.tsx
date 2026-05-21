@@ -5,16 +5,11 @@ export default function NavigationViewer() {
 
   return (
     <>
-      {navigationOptions.map((l) => {
-        return (
-          <button
-            key={l.name}
-            onClick={() => changeCurrentLocation(l.location)}
-          >
-            {l.name}
-          </button>
-        );
-      })}
+      {navigationOptions.map((l) => (
+        <button key={l.name} onClick={() => changeCurrentLocation(l)}>
+          <div>{l.displayName}</div>
+        </button>
+      ))}
     </>
   );
 }
