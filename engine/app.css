@@ -1,0 +1,33 @@
+.game-layout {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: darkcyan;
+}
+
+.panel-left {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: #2e4a6b;
+}
+
+.panel-right {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: #4a2e6b;
+}
+
+.panel-left > *,
+.panel-right > * {
+  flex: 1;
+  overflow: auto;
+}
+
+.panel-center {
+  overflow: hidden;
+  background-color: #2e6b4a;
+}
