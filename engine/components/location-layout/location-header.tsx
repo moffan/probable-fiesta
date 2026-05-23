@@ -1,6 +1,7 @@
-import { useLocations } from "@systems";
+type LocationHeaderProps = {
+  title: string;
+};
 
-export default function LocationHeader() {
-  const { currentLocation } = useLocations();
-  return <h1 className="location-header">{currentLocation.displayName}</h1>;
+export default function LocationHeader(props: LocationHeaderProps) {
+  return <h1 className="location-header">{props.title}</h1>;
 }
