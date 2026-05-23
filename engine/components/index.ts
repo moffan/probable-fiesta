@@ -4,3 +4,10 @@ export { default as Image } from "./image";
 export { default as ActionViewer } from "./action-viewer";
 export { default as StatsViewer } from "./stats-viewer";
 export { default as InventoryViewer } from "./inventory-viewer";
+export {
+  LocationLayout,
+  LocationHeader,
+  LocationFlavor,
+  LocationInScene,
+
+} from "./location-layout";
