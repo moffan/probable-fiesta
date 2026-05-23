@@ -1,0 +1,38 @@
+.location-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.location-layout img {
+  width: 100%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.location-header {
+  flex-shrink: 0;
+  padding: 0.5em 1em;
+  font-size: 1.5rem;
+}
+
+.location-flavor {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5em 1em;
+}
+
+.location-in-scene {
+  flex-shrink: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  padding: 0.5em 1em;
+  border-top: 1px solid currentColor;
+}
+
+.location-in-scene__item {
+  cursor: pointer;
+  padding: 0.25em 0.75em;
+}
