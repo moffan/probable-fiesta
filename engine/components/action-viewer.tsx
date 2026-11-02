@@ -1,3 +1,5 @@
+import "./action-viewer.css";
+
 export default function ActionViewer() {
-  return <div>ActionViewer</div>;
+  return <div className="action-viewer">ActionViewer</div>;
 }

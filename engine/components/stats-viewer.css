@@ -1,0 +1,7 @@
+.stats-viewer {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  height: 100%;
+  background-color: #3b4f7a;
+}

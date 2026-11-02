@@ -1,3 +1,5 @@
+import "./inventory-viewer.css";
+
 export default function InventoryViewer() {
-  return <div>InventoryViewer</div>;
+  return <div className="inventory-viewer">InventoryViewer</div>;
 }

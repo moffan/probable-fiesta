@@ -3,6 +3,7 @@
   flex-direction: column;
   overflow-y: auto;
   height: 100%;
+  background-color: #6b5a2e;
 }
 
 .navigation-viewer__button {

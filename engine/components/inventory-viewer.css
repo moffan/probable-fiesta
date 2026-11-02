@@ -1,0 +1,7 @@
+.inventory-viewer {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  height: 100%;
+  background-color: #2e6b6b;
+}
