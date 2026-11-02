@@ -1,1 +1,1 @@
-export type SceneComponent = React.FC<never>;
+export type SceneComponent = React.FC;
