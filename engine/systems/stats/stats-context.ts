@@ -1,7 +1,5 @@
 import { createContext, useContext } from "react";
 
-export const GENERAL_STATS_GROUP = "general";
-
 export type StatValue = string | number;
 export type Stats = Record<string, StatValue>;
 export type StatGroups = Record<string, Stats>;

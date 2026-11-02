@@ -1,8 +1,15 @@
 export { default as GameProvider } from "./game-provider";
-export { useLocations } from "./locations/location-context";
+export {
+  useLocations,
+  useConfigureLocations,
+  type FastTravelStop,
+  type FastTravelModes,
+  type FastTravelNetworks,
+  type RegisterFastTravelSettings,
+  type RegisterFastTravelOptions,
+} from "./locations/location-context";
 export {
   useStats,
-  GENERAL_STATS_GROUP,
   type StatValue,
   type Stats,
   type StatGroups,

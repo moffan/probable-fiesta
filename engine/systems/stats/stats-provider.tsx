@@ -1,6 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
 import {
-  GENERAL_STATS_GROUP,
   StatsContext,
   type RegisterStatOptions,
   type RegisterStatSettings,
@@ -14,7 +13,7 @@ type StatsProviderProps = {
 };
 
 const registerStatSettings: RegisterStatSettings = {
-  group: GENERAL_STATS_GROUP,
+  group: "general",
   replace: false,
 };
 
