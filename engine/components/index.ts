@@ -12,3 +12,4 @@ export {
 
 } from "./location-layout";
 export { GameLayout, Panel } from "./game-layout";
+export { default as FastTravelScene } from "./standard-components/fast-travel-scene";

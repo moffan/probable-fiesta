@@ -2,6 +2,7 @@ import { GameProvider } from "@systems";
 import Game from "@game";
 import {
   ActionViewer,
+  FastTravelScene,
   GameLayout,
   InventoryViewer,
   LocationViewer,
@@ -12,7 +13,7 @@ import {
 
 function App() {
   return (
-    <GameProvider game={Game}>
+    <GameProvider game={Game} fastTravelScene={FastTravelScene}>
       <GameLayout>
         <Panel.Left>
           <StatsViewer />

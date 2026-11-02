@@ -1,4 +1,5 @@
-import { useLocations, type SceneComponent } from "@systems";
+import type { SceneComponent } from "@systems";
+import { useLocationInternals } from "@systems/internal";
 import { logger } from "@utils/logger";
 
 const PLACEHOLDER = "/game/assets/placeholder.jpg";
@@ -27,7 +28,7 @@ type Props = {
 };
 
 export default function Image({ src }: Props) {
-  const { currentLocation } = useLocations();
+  const { currentLocation } = useLocationInternals();
 
   let path: string;
   if (src?.startsWith("/")) {

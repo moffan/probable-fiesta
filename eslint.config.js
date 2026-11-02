@@ -19,4 +19,21 @@ export default defineConfig([
       globals: globals.browser,
     },
   },
+  {
+    // Game code only uses the public engine API
+    files: ['game/**/*.{ts,tsx}'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['@systems/internal', '**/engine/systems/**'],
+              message: 'Engine internals are not for game code. Use @systems.',
+            },
+          ],
+        },
+      ],
+    },
+  },
 ])

@@ -1,1 +1,1 @@
-export type SceneComponent = React.FC;
+export type SceneComponent = React.FC & { locationId?: string };

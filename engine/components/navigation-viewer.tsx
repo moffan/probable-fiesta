@@ -1,14 +1,18 @@
-import { useLocations } from "@systems";
+import { useLocationInternals } from "@systems/internal";
 import "./navigation-viewer.css";
 
 export default function NavigationViewer() {
-  const { navigationOptions, changeCurrentLocation } = useLocations();
+  const { navigationOptions, navigate } = useLocationInternals();
 
   return (
     <div className="navigation-viewer">
-      {navigationOptions.map((l) => (
-        <button key={l.name} className="navigation-viewer__button" onClick={() => changeCurrentLocation(l)}>
-          {l.displayName}
+      {navigationOptions.map((option) => (
+        <button
+          key={option.label}
+          className="navigation-viewer__button"
+          onClick={() => navigate(option)}
+        >
+          {option.label}
         </button>
       ))}
     </div>

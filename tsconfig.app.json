@@ -21,6 +21,7 @@
     "paths": {
       "@game": ["game/index"],
       "@systems": ["engine/systems"],
+      "@systems/internal": ["engine/systems/internal"],
       "@components": ["engine/components"],
       "@utils/*": ["engine/utils/*"],
     },

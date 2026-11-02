@@ -1,7 +1,12 @@
 import type { SceneComponent } from "@systems";
 import { createContext, useContext } from "react";
 
-export type NavigationOptions = SceneComponent[];
+export type Exits = SceneComponent[];
+
+// What the navigation viewer shows, and what choosing it does
+export type NavigationOption =
+  | { kind: "move"; location: SceneComponent; label: string }
+  | { kind: "fastTravel"; network: string; mode: string; label: string };
 
 export type FastTravelStop = {
   location: SceneComponent;
@@ -25,9 +30,10 @@ export type RegisterFastTravelOptions =
 
 export type LocationSystemContext = {
   currentLocation: SceneComponent;
-  navigationOptions: NavigationOptions;
+  navigationOptions: NavigationOption[];
+  navigate: (option: NavigationOption) => void;
   changeCurrentLocation: (location: SceneComponent) => void;
-  setExits: (options: NavigationOptions) => void;
+  setExits: (exits: Exits) => void;
   fastTravelNetworks: FastTravelNetworks;
   registerFastTravel: (
     mode: string,
@@ -46,19 +52,9 @@ export function useLocations() {
     throw new Error("locations failed to initialize");
   }
 
-  const {
-    currentLocation,
-    navigationOptions,
-    changeCurrentLocation,
-    setExits,
-  } = ctx;
+  const { setExits } = ctx;
 
-  return {
-    currentLocation,
-    navigationOptions,
-    changeCurrentLocation,
-    setExits,
-  };
+  return { setExits };
 }
 
 export function useConfigureLocations() {
@@ -67,7 +63,19 @@ export function useConfigureLocations() {
     throw new Error("locations failed to initialize");
   }
 
-  const { registerFastTravel } = ctx;
+  const { changeCurrentLocation, registerFastTravel } = ctx;
 
-  return { registerFastTravel };
+  return { changeCurrentLocation, registerFastTravel };
+}
+
+// For the engine's own components only, see @systems/internal
+export function useLocationInternals() {
+  const ctx = useContext(LocationContext);
+  if (ctx == null) {
+    throw new Error("locations failed to initialize");
+  }
+
+  const { currentLocation, navigationOptions, navigate } = ctx;
+
+  return { currentLocation, navigationOptions, navigate };
 }

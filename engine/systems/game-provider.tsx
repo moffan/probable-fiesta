@@ -6,14 +6,17 @@ import type { SceneComponent } from "@systems";
 export type GameProviderProps = {
   children: React.ReactNode;
   game: SceneComponent;
+  fastTravelScene: SceneComponent;
 };
 
 export default function GameProvider(props: GameProviderProps) {
-  const { children, game } = props;
+  const { children, game, fastTravelScene } = props;
 
   return (
     <StatsProvider>
-      <LocationsProvider initialLocation={game}>{children}</LocationsProvider>
+      <LocationsProvider initialLocation={game} fastTravelScene={fastTravelScene}>
+        {children}
+      </LocationsProvider>
     </StatsProvider>
   );
 }
