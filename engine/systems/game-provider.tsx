@@ -1,5 +1,6 @@
 import type React from "react";
 import LocationsProvider from "./locations/location-provider";
+import StatsProvider from "./stats/stats-provider";
 import type { SceneComponent } from "@systems";
 
 export type GameProviderProps = {
@@ -11,6 +12,8 @@ export default function GameProvider(props: GameProviderProps) {
   const { children, game } = props;
 
   return (
-    <LocationsProvider initialLocation={game}>{children}</LocationsProvider>
+    <StatsProvider>
+      <LocationsProvider initialLocation={game}>{children}</LocationsProvider>
+    </StatsProvider>
   );
 }
