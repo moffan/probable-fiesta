@@ -11,3 +11,4 @@ export {
   LocationInScene,
 
 } from "./location-layout";
+export { GameLayout, Panel } from "./game-layout";

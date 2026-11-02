@@ -1,31 +1,31 @@
-import "./app.css";
-
 import { GameProvider } from "@systems";
 import Game from "@game";
 import {
   ActionViewer,
+  GameLayout,
   InventoryViewer,
   LocationViewer,
   NavigationViewer,
+  Panel,
   StatsViewer,
 } from "@components";
 
 function App() {
   return (
     <GameProvider game={Game}>
-      <div className="game-layout">
-        <div className="panel-left">
+      <GameLayout>
+        <Panel.Left>
           <StatsViewer />
           <InventoryViewer />
-        </div>
-        <div className="panel-center">
+        </Panel.Left>
+        <Panel.Center>
           <LocationViewer />
-        </div>
-        <div className="panel-right">
+        </Panel.Center>
+        <Panel.Right>
           <NavigationViewer />
           <ActionViewer />
-        </div>
-      </div>
+        </Panel.Right>
+      </GameLayout>
     </GameProvider>
   );
 }
