@@ -2,6 +2,7 @@ import { useCallback, useMemo, useState } from "react";
 import {
   StatsContext,
   type RegisterStatOptions,
+  defaultStatGroup,
   type RegisterStatSettings,
   type StatGroups,
   type StatsSystemContext,
@@ -13,8 +14,9 @@ type StatsProviderProps = {
 };
 
 const registerStatSettings: RegisterStatSettings = {
-  group: "general",
+  group: defaultStatGroup,
   replace: false,
+  visible: false,
 };
 
 export default function StatsProvider(props: StatsProviderProps) {
@@ -23,17 +25,24 @@ export default function StatsProvider(props: StatsProviderProps) {
 
   const registerStat = useCallback(
     (key: string, value: StatValue, options?: RegisterStatOptions) => {
-      const { group, replace } = {
-        ...registerStatSettings,
-        ...(typeof options === "string" ? { group: options } : options),
-      };
+      const given = typeof options === "string" ? { group: options } : options;
+      const { group, replace } = { ...registerStatSettings, ...given };
 
-      setStatGroups((groups) => ({
-        ...groups,
-        [group]: replace
-          ? { [key]: value }
-          : { ...groups[group], [key]: value },
-      }));
+      setStatGroups((groups) => {
+        // Updating a stat keeps its visibility and order unless new ones
+        // are given
+        const existing = groups[group]?.[key];
+        const visible =
+          given?.visible ?? existing?.visible ?? registerStatSettings.visible;
+        const order =
+          given?.order ?? existing?.order ?? registerStatSettings.order;
+        const stat = { value, visible, order };
+
+        return {
+          ...groups,
+          [group]: replace ? { [key]: stat } : { ...groups[group], [key]: stat },
+        };
+      });
     },
     [],
   );

@@ -3,6 +3,13 @@ import { createContext, useContext } from "react";
 
 export type Exits = SceneComponent[];
 
+export type SetExitsSettings = {
+  // The PC does not learn the way to the parent node on entering
+  hideParent: boolean;
+};
+
+export type SetExitsOptions = Partial<SetExitsSettings>;
+
 // What the navigation viewer shows, and what choosing it does
 export type NavigationOption =
   | { kind: "move"; location: SceneComponent; label: string }
@@ -10,7 +17,6 @@ export type NavigationOption =
 
 export type FastTravelStop = {
   location: SceneComponent;
-  known: boolean;
   name?: string;
 };
 
@@ -28,12 +34,27 @@ export type RegisterFastTravelOptions =
   | string
   | Partial<RegisterFastTravelSettings>;
 
+// The PC's location state, as the game saves and loads it
+export type LocationState = {
+  // A full locationId, or "" to stay where she is
+  currentLocation: string;
+  // Paths that may be shortened from the left, e.g.
+  // "ravenswood-university/east-hall/second-floor/room-210"
+  knownLocations: string[];
+  // Known stops, as "mode:locationId"
+  fastTravelPoints: string[];
+};
+
 export type LocationSystemContext = {
   currentLocation: SceneComponent;
+  currentLocationId: string | undefined;
+  knownLocationIds: string[];
+  registerLocations: (locations: SceneComponent[]) => void;
+  loadLocation: (location: LocationState) => void;
   navigationOptions: NavigationOption[];
   navigate: (option: NavigationOption) => void;
   changeCurrentLocation: (location: SceneComponent) => void;
-  setExits: (exits: Exits) => void;
+  setExits: (exits: Exits, options?: SetExitsOptions) => void;
   fastTravelNetworks: FastTravelNetworks;
   registerFastTravel: (
     mode: string,
@@ -63,9 +84,19 @@ export function useConfigureLocations() {
     throw new Error("locations failed to initialize");
   }
 
-  const { changeCurrentLocation, registerFastTravel } = ctx;
+  const {
+    changeCurrentLocation,
+    registerFastTravel,
+    registerLocations,
+    loadLocation,
+  } = ctx;
 
-  return { changeCurrentLocation, registerFastTravel };
+  return {
+    changeCurrentLocation,
+    registerFastTravel,
+    registerLocations,
+    loadLocation,
+  };
 }
 
 // For the engine's own components only, see @systems/internal
@@ -75,7 +106,19 @@ export function useLocationInternals() {
     throw new Error("locations failed to initialize");
   }
 
-  const { currentLocation, navigationOptions, navigate } = ctx;
+  const {
+    currentLocation,
+    currentLocationId,
+    knownLocationIds,
+    navigationOptions,
+    navigate,
+  } = ctx;
 
-  return { currentLocation, navigationOptions, navigate };
+  return {
+    currentLocation,
+    currentLocationId,
+    knownLocationIds,
+    navigationOptions,
+    navigate,
+  };
 }

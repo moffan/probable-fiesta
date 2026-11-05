@@ -3,6 +3,9 @@ export {
   useLocations,
   useConfigureLocations,
   type FastTravelStop,
+  type LocationState,
+  type SetExitsSettings,
+  type SetExitsOptions,
   type FastTravelModes,
   type FastTravelNetworks,
   type RegisterFastTravelSettings,
@@ -11,6 +14,7 @@ export {
 export {
   useStats,
   type StatValue,
+  type Stat,
   type Stats,
   type StatGroups,
   type RegisterStatSettings,

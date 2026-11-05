@@ -1,13 +1,24 @@
 import { createContext, useContext } from "react";
 
 export type StatValue = string | number;
-export type Stats = Record<string, StatValue>;
+export type Stat = {
+  value: StatValue;
+  visible: boolean;
+  // Lowest first; stats without one come last
+  order?: number;
+};
+export type Stats = Record<string, Stat>;
 export type StatGroups = Record<string, Stats>;
 
 export type RegisterStatSettings = {
   group: string;
   replace: boolean;
+  visible: boolean;
+  order?: number;
 };
+
+// The group a stat goes in when none is given. Internal to the engine.
+export const defaultStatGroup = "general";
 
 // A string is the name of the group
 export type RegisterStatOptions = string | Partial<RegisterStatSettings>;
@@ -29,5 +40,19 @@ export function useStats() {
     throw new Error("stats failed to initialize");
   }
 
-  return ctx;
+  const { registerStat } = ctx;
+
+  return { registerStat };
+}
+
+// For the engine's own components only, see @systems/internal
+export function useStatsInternals() {
+  const ctx = useContext(StatsContext);
+  if (ctx == null) {
+    throw new Error("stats failed to initialize");
+  }
+
+  const { statGroups } = ctx;
+
+  return { statGroups };
 }
